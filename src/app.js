@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
-app.get('/api/search/:beer_name', (req, res, next) => {
+app.get('/api/search/:beer_name', cors(), (req, res, next) => {
   let beer_name = req.params.beer_name;
   let untappdUrl = `https://api.untappd.com/v4/search/beer?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&q=${beer_name}`;
   let options = {
