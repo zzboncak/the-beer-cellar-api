@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV, CLIENT_ID, CLIENT_SECRET } = require('./config');
 const request = require('request');
+const authRouter = require('./auth/auth-router');
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use(helmet());
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
+
+app.use('/api/auth', authRouter);
 
 app.get('/api/search/:beer_name', cors(), (req, res, next) => {
   let beer_name = req.params.beer_name;
