@@ -36,7 +36,6 @@ describe('/api/users endpoint', () => {
                 .expect(201)
                 .expect(res => {
                     expect(res.body.id).to.exist
-                    //console.log(res)
                     expect(res.body.username).to.eql(newUser.username)
                 })
         })
