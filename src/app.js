@@ -19,7 +19,7 @@ app.use(morgan(morganOption));
 //CLIENT_ORIGIN is an array of allowed origins. This logic allows those domains through, and blocks the others
 let corsOptions = {
   origin: function (origin, callback) {
-    if (CLIENT_ORIGIN.indexOf(origin) !== -1) {
+    if (CLIENT_ORIGIN.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
