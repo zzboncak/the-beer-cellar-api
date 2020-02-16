@@ -7,6 +7,7 @@ const { NODE_ENV, CLIENT_ID, CLIENT_SECRET, CLIENT_ORIGIN } = require('./config'
 const request = require('request');
 const authRouter = require('./auth/auth-router');
 const usersRouter = require('./users/users-router');
+const cellarRouter = require('./cellar/cellar-router');
 
 const app = express();
 
@@ -28,6 +29,8 @@ let corsOptions = {
 }
 app.use(cors(corsOptions));
 
+// app.use(cors());
+
 app.use(helmet());
 
 app.get('/', (req, res) => {
@@ -36,6 +39,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/cellar', cellarRouter);
 
 app.get('/api/search/:beer_name', (req, res, next) => {
   let beer_name = req.params.beer_name;
