@@ -11,13 +11,11 @@ const jsonBodyParser = express.json()
 cellarRouter
     .route('/')
     .get(requireAuth, jsonBodyParser, (req, res, next) => {
-        console.log(req.user);
         CellarService.getUserBeers(
             req.app.get('db'),
             req.user.id
         )
             .then(response => {
-                console.log(response)
                 res.json(response)
             })
             .catch(next)
@@ -36,7 +34,6 @@ cellarRouter
         //if it doesn't exist, first add the beer to the beers table and then add the inventory
             .then(beer => {
                 if(!beer){
-                    console.log('no beer!')
                     let untappdUrl = `https://api.untappd.com/v4/beer/info/${bid}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&oauth_consumer_key=${CLIENT_ID}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1581543417&oauth_nonce=o4uUA6ovQTM&oauth_version=1.0&oauth_signature=+cNoi9pGpQCFryVCOHqge5KoH6o=`;
                     let options = {
                         'method': 'GET',
