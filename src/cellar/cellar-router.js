@@ -27,12 +27,13 @@ cellarRouter
     .route('/add/:bid')
     .post(requireAuth, jsonBodyParser, (req, res, next) => {
         let bid = req.params.bid;
-        //need a service object to check if a beer with this beer id is in the database already
-        //if so, just add the inventory line. If not, request the data from Untappd.
+        //First check if the beer already exists in the beers table of our database
         CellarService.getBeerbyId(
             req.app.get('db'),
             bid
         )
+        //if it does exist, add an inventory line for the user that they have the beer
+        //if it doesn't exist, first add the beer to the beers table and then add the inventory
             .then(beer => {
                 if(!beer){
                     console.log('no beer!')
@@ -58,7 +59,6 @@ cellarRouter
                             beer_image: untappdBeer.beer_label,
                             beer_style: untappdBeer.beer_style
                         }
-                        //need service object to insert beer into the beers table
                         CellarService.addBeerToBeerTable(
                             req.app.get('db'),
                             newBeer
@@ -81,7 +81,6 @@ cellarRouter
                     )
                         .then(lineAdded => res.status(201).send('Inventory added'))
                         .catch(next)
-                    //res.send(beer)
                 }
             })
     })
