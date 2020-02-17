@@ -1,0 +1,3 @@
+TRUNCATE
+  inventory
+  RESTART IDENTITY CASCADE;
