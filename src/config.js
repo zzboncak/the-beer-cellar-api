@@ -6,5 +6,5 @@ module.exports = {
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET,
     JWT_SECRET: 'beer-cellar-token',
-    CLIENT_ORIGIN: ['https://the-beer-cellar-app-1q5d2qv3q.now.sh', 'http://localhost:3000']
+    CLIENT_ORIGIN: ['https://the-beer-cellar-app-1q5d2qv3q.now.sh', 'http://localhost:3000'],
 };
