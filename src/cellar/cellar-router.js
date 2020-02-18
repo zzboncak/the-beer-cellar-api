@@ -85,7 +85,6 @@ cellarRouter
 cellarRouter
     .route('/inventory')
     .patch(requireAuth, jsonBodyParser, (req, res, next) => {
-        console.log(req.body);
         const { inventory_id, updatedQuantity } = req.body;
         const requiredFields = { inventory_id, updatedQuantity };
 
