@@ -22,7 +22,7 @@ cellarRouter
     })
 
 cellarRouter
-    .route('/add/:bid')
+    .route('/:bid')
     .post(requireAuth, jsonBodyParser, (req, res, next) => {
         let bid = req.params.bid;
         //First check if the beer already exists in the beers table of our database
@@ -80,6 +80,30 @@ cellarRouter
                         .catch(next)
                 }
             })
+    })
+
+cellarRouter
+    .route('/inventory')
+    .patch(requireAuth, jsonBodyParser, (req, res, next) => {
+        console.log(req.body);
+        const { inventory_id, updatedQuantity } = req.body;
+        const requiredFields = { inventory_id, updatedQuantity };
+
+        for (const [key, value] of Object.entries(requiredFields)) {
+            if(value == null) {
+                return res.status(400).json({
+                    error: `Missing '${key}' in request body`
+                })
+            }
+        }
+
+        CellarService.updateUserInventory(
+            req.app.get('db'),
+            inventory_id,
+            updatedQuantity
+        )
+            .then(response => res.status(204).end())
+            .catch(next)
     })
 
 module.exports = cellarRouter;
