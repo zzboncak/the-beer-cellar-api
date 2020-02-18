@@ -106,7 +106,6 @@ cellarRouter
     })
     .delete(requireAuth, jsonBodyParser, (req, res, next) => {
         const { inventory_id } = req.body;
-        console.log(inventory_id);
 
         CellarService.deleteInventory(
             req.app.get('db'),
