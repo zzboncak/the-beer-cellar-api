@@ -37,6 +37,11 @@ const CellarService = {
         return knex('inventory')
             .where('id', inventory_id)
             .update('quantity', updatedQuantity)
+    },
+    deleteInventory(knex, inventory_id) {
+        return knex('inventory')
+            .where('id', inventory_id)
+            .del()
     }
 }
 

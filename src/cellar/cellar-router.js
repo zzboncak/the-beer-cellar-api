@@ -104,5 +104,16 @@ cellarRouter
             .then(response => res.status(204).end())
             .catch(next)
     })
+    .delete(requireAuth, jsonBodyParser, (req, res, next) => {
+        const { inventory_id } = req.body;
+        console.log(inventory_id);
+
+        CellarService.deleteInventory(
+            req.app.get('db'),
+            inventory_id
+        )
+            .then(numRowsAffected => res.status(204).end())
+            .catch(next)
+    })
 
 module.exports = cellarRouter;
