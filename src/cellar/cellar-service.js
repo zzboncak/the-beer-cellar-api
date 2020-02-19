@@ -42,6 +42,13 @@ const CellarService = {
         return knex('inventory')
             .where('id', inventory_id)
             .del()
+    },
+    getInventoryLine(knex, beer_id) {
+        return knex
+            .select('*')
+            .from('inventory')
+            .where({ beer_id })
+            .first()
     }
 }
 

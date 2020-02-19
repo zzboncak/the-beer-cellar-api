@@ -71,13 +71,39 @@ cellarRouter
                             })
                     })
                 } else {
-                    CellarService.addBeerForUser(
+                    CellarService.getInventoryLine(
                         req.app.get('db'),
-                        req.user.id,
                         beer.id
                     )
-                        .then(lineAdded => res.status(201).send('Inventory added'))
-                        .catch(next)
+                        .then(inventoryLine => {
+                            if(!inventoryLine) {
+                                CellarService.addBeerForUser(
+                                    req.app.get('db'),
+                                    req.user.id,
+                                    beer.id
+                                )
+                                    .then(lineAdded => res.status(201).send('Inventory added'))
+                                    .catch(next)
+                            } else {
+                                let newInventory = inventoryLine.quantity + 1;
+                                let inventory_id = inventoryLine.id;
+                                CellarService.updateUserInventory(
+                                    req.app.get('db'),
+                                    inventory_id,
+                                    newInventory
+                                )
+                                    .then(response => res.status(204).end())
+                                    .catch(next)
+                            }
+
+                        })
+                    // CellarService.addBeerForUser(
+                    //     req.app.get('db'),
+                    //     req.user.id,
+                    //     beer.id
+                    // )
+                    //     .then(lineAdded => res.status(201).send('Inventory added'))
+                    //    .catch(next)
                 }
             })
     })
