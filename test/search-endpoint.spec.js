@@ -10,14 +10,4 @@ describe('Untappd endpoints', () => {
                 expect(res.text).to.exist
             )
     })
-
-    it('returns data from a detailed beer search to /api/add/:bid', () => {
-        let bid = 2789250;
-        return supertest(app)
-            .get(`/api/add/${bid}`)
-            .expect(200)
-            .expect(res => {
-                expect(res.text).to.exist
-            })
-    })
 })

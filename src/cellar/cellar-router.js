@@ -97,13 +97,6 @@ cellarRouter
                             }
 
                         })
-                    // CellarService.addBeerForUser(
-                    //     req.app.get('db'),
-                    //     req.user.id,
-                    //     beer.id
-                    // )
-                    //     .then(lineAdded => res.status(201).send('Inventory added'))
-                    //    .catch(next)
                 }
             })
     })

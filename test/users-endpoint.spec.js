@@ -1,6 +1,7 @@
 const knex = require('knex');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
+const AuthService = require('../src/auth/auth-service');
 
 describe('/api/users endpoint', () => {
     let db
@@ -22,9 +23,8 @@ describe('/api/users endpoint', () => {
     afterEach('cleanup', () => helpers.cleanTables(db))
 
     describe('POST /api/users', () => {
-        //beforeEach('seed users', helpers.seedUsersTable(db, testUsers));
 
-        it('responds with 201 and the created user with successful credentials', () => {
+        it('responds with 201 and the jwt', () => {
             let newUser = {
                 username: 'new-user',
                 user_password: 'newPassword123'
@@ -35,8 +35,8 @@ describe('/api/users endpoint', () => {
                 .send(newUser)
                 .expect(201)
                 .expect(res => {
-                    expect(res.body.id).to.exist
-                    expect(res.body.username).to.eql(newUser.username)
+                    let responsePayload = AuthService.verifyJwt(res.body);
+                    expect(responsePayload.sub).to.eql(newUser.username);
                 })
         })
     })
