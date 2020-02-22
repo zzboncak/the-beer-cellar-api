@@ -2,7 +2,7 @@ function makeUsersArray() {
     return [
         {
             username: 'test-user-1',
-            user_password: '$2a$12$.WYU9w8bPAWxd7JouMT9EukJFgwwxVWHY6Ql5UjxBybYLaJHxo9yG',
+            user_password: '$2a$12$xEmGG88QT9XNJrfcibQsKeL5ciz4lfqT.peJrX.z11IgS2PyeFfoK',
         },
         {
             username: 'test-user-2',
