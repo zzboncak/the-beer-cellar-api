@@ -1,7 +1,7 @@
 const CellarService = {
     getUserBeers(knex, user_id) {
         return knex
-            .select('i.id as inventory_id', 'b.beer_name', 'i.quantity', 'b.beer_description', 'b.untappd_rating', 'b.brewery_name', 'b.beer_image')
+            .select('i.id as inventory_id', 'b.beer_name', 'i.quantity', 'b.beer_description', 'b.untappd_rating', 'b.brewery_name', 'b.beer_image', 'b.untappd_beer_id', 'b.beer_style', 'b.brewery_id')
             .from('inventory as i')
             .join('beers as b', 'b.id', '=', 'i.beer_id')
             .join('users as u', 'u.id', '=', 'i.user_id')
@@ -43,11 +43,14 @@ const CellarService = {
             .where('id', inventory_id)
             .del()
     },
-    getInventoryLine(knex, beer_id) {
+    getInventoryLine(knex, beer_id, user_id) {
         return knex
             .select('*')
             .from('inventory')
-            .where({ beer_id })
+            .where({ 
+                beer_id: beer_id,
+                user_id: user_id
+             })
             .first()
     }
 }

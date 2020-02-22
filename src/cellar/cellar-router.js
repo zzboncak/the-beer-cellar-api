@@ -73,7 +73,8 @@ cellarRouter
                 } else {
                     CellarService.getInventoryLine(
                         req.app.get('db'),
-                        beer.id
+                        beer.id,
+                        req.user.id
                     )
                         .then(inventoryLine => {
                             if(!inventoryLine) {

@@ -22,35 +22,39 @@ function makeUsersArray() {
 function makeBeersArray() {
     return [
         {
-            untappd_beer_id: 1,
-            beer_name: 'Beer 1',
-            untappd_rating: 4.5,
-            beer_description: 'Description 1',
-            brewery_id: 1,
-            brewery_name: 'Brewery 1',
-            beer_image: 'image 1',
-            beer_style: 'Style 1'
-        },
-        {
-            untappd_beer_id: 2,
-            beer_name: 'Beer 2',
-            untappd_rating: 4.7,
-            beer_description: 'Description 2',
-            brewery_id: 2,
-            brewery_name: 'Brewery 2',
-            beer_image: 'image 2',
-            beer_style: 'Style 2'
-        },
-        {
-            untappd_beer_id: 3,
-            beer_name: 'Beer 3',
-            untappd_rating: 5,
-            beer_description: 'Description 3',
-            brewery_id: 3,
-            brewery_name: 'Brewery 3',
-            beer_image: 'image 3',
-            beer_style: 'Style 3'
-        },
+            untappd_beer_id: 3368648,
+            beer_name: 'Reserve Rye Bourbon County Brand Stout (2019)',
+            untappd_rating: 4.43192,
+            beer_description: `Our Reserve Bourbon County Stout releases showcase how a premium single source bourbon barrel can influence the nuances and flavors of our original BCS.The 2019 Reserve Rye is aged in 100% Rittenhouse Rye barrels - lovingly referred to as "the bartender's favorite" rye. Rittenhouse's Barrels had a unique effect on the original imperial stout, imparting flavors of fruit and spice. Reserve Rye accentuates all that makes Rittenhouse and Bourbon County unique.`,
+            brewery_id: 2898,
+            brewery_name: 'Goose Island Beer Co.',
+            beer_image: 'https://untappd.akamaized.net/site/beer_logos/beer-3368648_3cf3d_sm.jpeg',
+            beer_style: 'Stout - Imperial / Double'
+          },
+          {
+            untappd_beer_id: 3634543,
+            beer_name: 'Roll For Initiative (2020)',
+            untappd_rating: 4.35374,
+            beer_description: "Gather your band of intrepid heroes and journey forth on a twisting climb through spiraling peaks of earthy cassia bark capped with glistening frosted tips that sparkle with Madagascar's finest vanilla. Will you: Roll 1-10 to Drink Fresh, or 11-20 to Cellar & Save?\r\n" +
+              '\r\n' +
+              'This second batch of our critical hit is a cinnamon roll-inspired Bourbon Barrel Aged Imperial Vanilla Stout based on our famed Fundamental Observation recipe, then aged with even more Madagascar vanilla beans and finished with sweet, earthy cassia bark.\r\n' +
+              '\r\n' +
+              'Tickets go on sale at 12pm on 1/26 at tinyurl.com/RFIBLB!',
+            brewery_id: 94408,
+            brewery_name: 'Bottle Logic Brewing',
+            beer_image: 'https://untappd.akamaized.net/site/beer_logos/beer-3634543_8863a_sm.jpeg',
+            beer_style: 'Stout - Pastry'
+          },
+          {
+            untappd_beer_id: 1529002,
+            beer_name: 'Dark Lord - Marshmallow Handjee (2016)',
+            untappd_rating: 4.77615,
+            beer_description: 'Dark Lord aged in bourbon barrels with vanilla beans bottled with a space-themed label.',
+            brewery_id: 2470,
+            brewery_name: '3 Floyds Brewing Company',
+            beer_image: 'https://untappd.akamaized.net/site/beer_logos/beer-1529002_336b3_sm.jpeg',
+            beer_style: 'Stout - Russian Imperial'
+          },
     ]
 }
 
