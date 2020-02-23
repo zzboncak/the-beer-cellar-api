@@ -2,11 +2,9 @@
 
 This server exists to support The Beer Cellar client
 
-## By Zachary Zboncak
-
 ### Base URL: https://secret-plateau-55760.herokuapp.com/api
 
-#### Overview:
+## Overview:
 
 This API exists so that users can keep track of their carefully curated beers. It is integrated with Untappd's search features to have a standardized format and catalog of beers available to the user. A user is able to search Untappd's database of beers, select the one they want to add to their cellar, and store that data. In addition to Untappd's data, through The Beer Cellar API a user can keep track of how many beers they have for a quick reference.
 
@@ -25,15 +23,13 @@ fetch('https://secret-plateau-55760.herokuapp.com/api/cellar', {
 }
 ```
 
-To obtain a valid JWT, you must either call the login endpoint (see below), or register a new account if you haven't already: 
-https://the-beer-cellar-app.now.sh/register - automatic!
-[The Beer Cellar](https://the-beer-cellar-app.now.sh/register)
+To obtain a valid JWT, you must either call the login endpoint (see below), or register a new account if you haven't already: [The Beer Cellar Register Page](https://the-beer-cellar-app.now.sh/register)
 
 #### Endpoints:
 
 ##### Search Untappd's database using GET /search/:beer_name
 
-This is essentially utilizing Untappd's API found at https://untappd.com/api/docs#beersearch. The beer_name paramater is a required string. Replace spaces with a plus sign:
+This is essentially utilizing Untappd's API found at [Untappd's API Docs](https://untappd.com/api/docs#beersearch). The beer_name paramater is a required string. Replace spaces with a plus sign:
 
 **Example:**
 ```javascript
@@ -43,6 +39,81 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/search/${searchTerm}`)
     .then(data => console.log(data));
 ```
 *Note: this is the only endpoint for The Beer Cellar API that is not protected.*
+
+**Example response:**
+```javascript
+{
+    "meta": {
+        "code": 200,
+        "response_time": {
+            "time": 0.126,
+            "measure": "seconds"
+        },
+        "init_time": {
+            "time": 0,
+            "measure": "seconds"
+        }
+    },
+    "notifications": [],
+    "response": {
+        "message": "",
+        "time_taken": 0.034,
+        "brewery_id": 0,
+        "search_type": "",
+        "type_id": 0,
+        "search_version": 4,
+        "found": 13,
+        "offset": 0,
+        "limit": 25,
+        "term": "bourbon county 2019",
+        "parsed_term": "bourbon county 2019",
+        "beers": {
+            "count": 13,
+            "items": [
+                {
+                    "checkin_count": 38191,
+                    "have_had": false,
+                    "your_count": 0,
+                    "beer": {
+                        "bid": 3507187,
+                        "beer_name": "Bourbon County Brand Stout (2019) 14.7%",
+                        "beer_label": "https://untappd.akamaized.net/site/beer_logos/beer-3200860_3e2be_sm.jpeg",
+                        "beer_abv": 14.7,
+                        "beer_slug": "goose-island-beer-co-bourbon-county-brand-stout-2019-147",
+                        "beer_ibu": 60,
+                        "beer_description": "This year’s Bourbon County Stout, aged in a mix of Heaven Hill, Buffalo Trace, and Wild Turkey barrels, yields a rich, complex mouthfeel. Flavors of cocoa, fudge, vanilla, caramel, almond, plus leather and tobacco, permeate this beer and deepen with each sip. We’ve bottled Bourbon County Stout for 15 years and this year’s vintage is one that you will want to hold on to for years to come.",
+                        "created_at": "Wed, 30 Oct 2019 23:06:41 +0000",
+                        "beer_style": "Stout - American Imperial / Double",
+                        "in_production": 1,
+                        "auth_rating": 0,
+                        "wish_list": false
+                    },
+                    "brewery": {
+                        "brewery_id": 2898,
+                        "brewery_name": "Goose Island Beer Co.",
+                        "brewery_slug": "goose-island-beer-co",
+                        "brewery_page_url": "/gooseisland",
+                        "brewery_type": "Macro Brewery",
+                        "brewery_label": "https://untappd.akamaized.net/site/brewery_logos/brewery-2898_7ee53.jpeg",
+                        "country_name": "United States",
+                        "contact": {
+                            "twitter": "GooseIsland",
+                            "facebook": "https://m.facebook.com/Goose-Island-157863547303/",
+                            "instagram": "gooseisland",
+                            "url": "http://www.gooseisland.com/"
+                        },
+                        "location": {
+                            "brewery_city": "Chicago",
+                            "brewery_state": "IL",
+                            "lat": 41.8871,
+                            "lng": -87.6721
+                        },
+                        "brewery_active": 1
+                    }
+                },
+                ...
+```
+
 
 ##### 'GET /cellar'
 
@@ -114,9 +185,9 @@ fetch('https://secret-plateau-55760.herokuapp.com/api/cellar', {
 
 ##### 'POST /cellar/:bid'
 
-'bid' stands for Untappd's Beer Id, which can be found using the 'GET /search/:beer_name'. Calling this endpoint will attempt to add the beer with that untappd id to the logged in user's inventory. If the beer doesn't exist in The Beer Cellar's database, it is first added and then the user inventory is added. If the user already has this beer in his/her inventory, the quantity of the beer is simply increased by one.
+'bid' stands for Untappd's Beer Id, which can be found using the 'GET /search/:beer_name'. Calling this endpoint will attempt to add the beer with that Untappd Id to the logged in user's inventory. If the beer doesn't exist in The Beer Cellar's database, it first adds the beer and then the inventory is added for the user. If the user already has this beer in his/her inventory, the quantity of the beer is simply increased by one.
 
-When successful, if the user did not have the beer prior to making the call, the API responds with a status of 201 and the message 'Inventory added'. Else, if the user already had that beer in the inventory, the API will respond with 204 no content.
+When successful, if the user did not have the beer prior to making the call, the API responds with a status of `201` and the message 'Inventory added'. Else, if the user already had that beer in the inventory, the API will respond with `204` no content.
 
 **Example:**
 ```javascript
@@ -132,7 +203,7 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/cellar/${bid}`, {
 
 This endpoint is used to update a user's inventory. The body of the request must contain the fields **inventory_id** and **updatedQuantity**. Your inventory_id number can be found by calling GET /cellar when logged in.
 
-When successful, the API responds with a status code of 204 no content.
+When successful, the API responds with a status code of `204` no content.
 
 **Example:**
 ```javascript
@@ -155,7 +226,7 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/cellar/inventory`, {
 
 This endpoint deletes a line of inventory from the database. The body of the request must contain the **inventory_id** field. Your inventory_id number can be found by calling GET /cellar when logged in.
 
-When successful, the API responds with a status code of 204 no content.
+When successful, the API responds with a status code of `204` no content.
 
 **Example:**
 ```javascript
@@ -168,3 +239,7 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/cellar/inventory`, {
     body: JSON.stringify({ inventory_id: 15 })
 })
 ```
+
+### Developed by Zachary Zboncak
+
+Powered by [Untappd](https://untappd.com/api/docs)
