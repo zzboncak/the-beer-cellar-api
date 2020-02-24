@@ -8,7 +8,7 @@ This server exists to support The Beer Cellar client
 
 This API exists so that users can keep track of their carefully curated beers. It is integrated with Untappd's search features to have a standardized format and catalog of beers available to the user. A user is able to search Untappd's database of beers, select the one they want to add to their cellar, and store that data. In addition to Untappd's data, through The Beer Cellar API a user can keep track of how many beers they have for a quick reference.
 
-#### Authorization:
+### Authorization:
 
 This app uses JWTs to authenticate usage. Calling any of the endpoints bellow will require the "Authorization" header to be present with a valid JWT.
 
@@ -25,9 +25,61 @@ fetch('https://secret-plateau-55760.herokuapp.com/api/cellar', {
 
 To obtain a valid JWT, you must either call the login endpoint (see below), or register a new account if you haven't already: [The Beer Cellar Register Page](https://the-beer-cellar-app.now.sh/register)
 
-#### Endpoints:
+## Endpoints:
 
-##### Search Untappd's database using GET /search/:beer_name
+#### Login using POST /auth/login
+
+Call this endpoint to receive a valid JWT. The body of the request must contain valid credentials from a registered user and include the keys `username`, and `user_password`.
+
+**Example:**
+```javascript
+let credentials = {
+    username: 'your_username',
+    user_password: 'SuPerSeCurePassWorD123'
+}
+fetch(`https://secret-plateau-55760.herokuapp.com/api/auth/login`, {
+    method: 'POST',
+    headers: {
+        'content-type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+```
+**Example response:**
+```javascript
+{
+    "authToken": "your_JWT"
+}
+```
+
+#### Register as a new user using POST /users
+
+Call this endpoint to create a new account with The Beer Cellar. With successful credentials, a valid JWT is returned. You must include the keys `username`, and `user_password` in your request body. 
+
+*Password Requirements:* Your password needs to be greater than 8 but less than 72 characters, and include at least one upper case character and one lower case character.
+
+When successful, the API will respond with a status of `201` with your valid JWT in the body of the response.
+
+**Example:**
+```javascript
+let credentials = {
+    username: 'your_username',
+    user_password: 'SuPerSeCurePassWorD123'
+}
+fetch(`https://secret-plateau-55760.herokuapp.com/api/users`, {
+    method: 'POST',
+    headers: {
+        'content-type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+```
+**Example response:**
+```javascript
+{
+    "authToken": "your_JWT"
+}
+```
+
+#### Search Untappd's database using GET /search/:beer_name
 
 This is essentially utilizing Untappd's API found at [Untappd's API Docs](https://untappd.com/api/docs#beersearch). The beer_name paramater is a required string. Replace spaces with a plus sign:
 
@@ -115,7 +167,7 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/search/${searchTerm}`)
 ```
 
 
-##### 'GET /cellar'
+#### 'GET /cellar'
 
 This endpoint returns an array of beers the logged in user has in inventory. 
 
@@ -183,7 +235,7 @@ fetch('https://secret-plateau-55760.herokuapp.com/api/cellar', {
 ]
 ```
 
-##### 'POST /cellar/:bid'
+#### 'POST /cellar/:bid'
 
 'bid' stands for Untappd's Beer Id, which can be found using the 'GET /search/:beer_name'. Calling this endpoint will attempt to add the beer with that Untappd Id to the logged in user's inventory. If the beer doesn't exist in The Beer Cellar's database, it first adds the beer and then the inventory is added for the user. If the user already has this beer in his/her inventory, the quantity of the beer is simply increased by one.
 
@@ -199,7 +251,7 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/cellar/${bid}`, {
 })
 ```
 
-##### 'PATCH /cellar/inventory'
+#### 'PATCH /cellar/inventory'
 
 This endpoint is used to update a user's inventory. The body of the request must contain the fields **inventory_id** and **updatedQuantity**. Your inventory_id number can be found by calling GET /cellar when logged in.
 
@@ -222,7 +274,7 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/cellar/inventory`, {
 })
 ```
 
-##### 'DELETE /cellar/inventory'
+#### 'DELETE /cellar/inventory'
 
 This endpoint deletes a line of inventory from the database. The body of the request must contain the **inventory_id** field. Your inventory_id number can be found by calling GET /cellar when logged in.
 
