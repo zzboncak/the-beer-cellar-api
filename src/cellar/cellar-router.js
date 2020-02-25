@@ -108,6 +108,12 @@ cellarRouter
         const { inventory_id, updatedQuantity } = req.body;
         const requiredFields = { inventory_id, updatedQuantity };
 
+        if (updatedQuantity < 0) {
+            return res.status(418).json({
+                error: `Quantity must be greater than or equal to 0. You can't have negative beers...`
+            });
+        }
+
         for (const [key, value] of Object.entries(requiredFields)) {
             if(value == null) {
                 return res.status(400).json({
