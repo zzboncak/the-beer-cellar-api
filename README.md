@@ -294,4 +294,17 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/cellar/inventory`, {
 
 ### Developed by Zachary Zboncak
 
+### Technologies used
+
+**Client-side: [The Beer Cellar Client](https://github.com/zzboncak/the-beer-cellar-client)**
+- React.js
+- HTML
+- CSS
+- Javascript
+
+**Server-side:**
+- Node.js
+- Express
+- PostgreSQL
+
 Powered by [Untappd](https://untappd.com/api/docs)
