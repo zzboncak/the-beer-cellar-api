@@ -19,7 +19,7 @@ authRouter
 
     AuthService.getUserWithUserName(
         req.app.get('db'),
-        loginUser.username
+        loginUser.username.toLowerCase().replace(/\s/g, '')
     )
         .then(dbUser => {
             if(!dbUser) {
