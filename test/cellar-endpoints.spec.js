@@ -130,7 +130,6 @@ describe('/api/cellar endpoints', () => {
                         .set('Authorization', `Bearer ${testJwt}`)
                         .expect(200)
                         .then(res => {
-                            //console.log(res.body)
                             let addedBeer = res.body.filter(beer => beer.untappd_beer_id === 4499)[0] //[0] because this will be an array with one object in it and we want the object
                             expect(addedBeer.untappd_beer_id).to.eql(4499)
                         }));
