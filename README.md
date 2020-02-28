@@ -297,14 +297,15 @@ fetch(`https://secret-plateau-55760.herokuapp.com/api/cellar/inventory`, {
 ### Technologies used
 
 **Client-side: [The Beer Cellar Client](https://github.com/zzboncak/the-beer-cellar-client)**
-- React.js
-- HTML
-- CSS
-- Javascript
+- [React.js](https://reactjs.org/)
+- [HTML](https://en.wikipedia.org/wiki/HTML)
+- [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+- [Javascript](https://en.wikipedia.org/wiki/JavaScript)
 
 **Server-side:**
-- Node.js
-- Express
-- PostgreSQL
+- [Node.js](https://nodejs.org/en/)
+- [Request](https://github.com/request/request)
+- [Express](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 Powered by [Untappd](https://untappd.com/api/docs)
